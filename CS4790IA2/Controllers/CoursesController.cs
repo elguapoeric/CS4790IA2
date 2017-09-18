@@ -18,7 +18,7 @@ namespace CS4790IA2.Controllers
         public ActionResult Index()
         {
             //return View(db.courses.ToList());
-            return View(BasicSchool.getAllCourses());
+            return View(Repository.getAllCourses());
         }
 
         // GET: Courses/Details/5
@@ -65,8 +65,9 @@ namespace CS4790IA2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.courses.Add(course);
-                db.SaveChanges();
+                //db.courses.Add(course);
+                //db.SaveChanges();
+                Repository.createCourse(course);
                 return RedirectToAction("Index");
             }
 
@@ -80,7 +81,7 @@ namespace CS4790IA2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.courses.Find(id);
+            Course course = Repository.getCourse(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -97,8 +98,9 @@ namespace CS4790IA2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(course).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(course).State = EntityState.Modified;
+                //db.SaveChanges();
+                Repository.editCourse(course);
                 return RedirectToAction("Index");
             }
             return View(course);
@@ -111,7 +113,7 @@ namespace CS4790IA2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.courses.Find(id);
+            Course course = Repository.getCourse(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -124,9 +126,8 @@ namespace CS4790IA2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.courses.Find(id);
-            db.courses.Remove(course);
-            db.SaveChanges();
+            Course course = Repository.getCourse(id);
+            Repository.deleteCourse(course);
             return RedirectToAction("Index");
         }
 

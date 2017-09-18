@@ -25,11 +25,70 @@ namespace CS4790IA2.Models
             return course;
         }
 
-      /*  public static List<Course> getAllCourses()
+        public static void deleteCourse(Course course)
         {
             BasicSchoolDbContext db = new BasicSchoolDbContext();
-            return db.courses.ToList();
-        }*/
+            db.Entry(course).State = EntityState.Deleted;
+            db.courses.Remove(course);
+            db.SaveChanges();
+        }
+
+        public static void editCourse(Course course)
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            db.Entry(course).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public static void createCourse(Course course)
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            db.Entry(course).State = EntityState.Added;
+            db.courses.Add(course);
+            db.SaveChanges();
+        }
+
+        public static List<Section> getAllSections()
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            return db.sections.ToList();
+        }
+
+        public static Section getSection(int? id)
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            Section section = db.sections.Find(id);
+            return section;
+        }
+
+        public static void deleteSection(Section section)
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            db.Entry(section).State = EntityState.Deleted;
+            db.sections.Remove(section);
+            db.SaveChanges();
+        }
+
+        public static void editSection(Section section)
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            db.Entry(section).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public static void createSection(Section section)
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            db.Entry(section).State = EntityState.Added;
+            db.sections.Add(section);
+            db.SaveChanges();
+        }
+
+        /*  public static List<Course> getAllCourses()
+          {
+              BasicSchoolDbContext db = new BasicSchoolDbContext();
+              return db.courses.ToList();
+          }*/
     }
 
 
