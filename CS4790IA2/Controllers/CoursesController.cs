@@ -36,19 +36,32 @@ namespace CS4790IA2.Controllers
             return View(course);
         }
 
-       /* public ActionResult CourseAndSections(int? id)
+        public ActionResult CourseAndDetails(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = Repository.getCourse(id);
-            if (course == null)
+            CourseAndSections courseSections = Repository.getCourseAndSections(id);
+            if (courseSections == null)
             {
                 return HttpNotFound();
             }
-            return View(course);
-        }*/
+            return View(courseSections);
+        }
+        /* public ActionResult CourseAndSections(int? id)
+         {
+             if (id == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }
+             Course course = Repository.getCourse(id);
+             if (course == null)
+             {
+                 return HttpNotFound();
+             }
+             return View(course);
+         }*/
 
         // GET: Courses/Create
         public ActionResult Create()
@@ -130,7 +143,7 @@ namespace CS4790IA2.Controllers
             Repository.deleteCourse(course);
             return RedirectToAction("Index");
         }
-
+        //closes the connection
         protected override void Dispose(bool disposing)
         {
             if (disposing)

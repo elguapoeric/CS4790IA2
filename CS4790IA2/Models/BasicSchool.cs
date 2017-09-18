@@ -83,6 +83,15 @@ namespace CS4790IA2.Models
             db.sections.Add(section);
             db.SaveChanges();
         }
+        public static CourseAndSections getCourseAndSections(int? id)
+        {
+            BasicSchoolDbContext db = new BasicSchoolDbContext();
+            CourseAndSections courseSection = new CourseAndSections();
+            courseSection.course = db.courses.Find(id);
+            var sections = db.sections.Where(s => s.courseNumber == courseSection.course.courseNumber);
+            courseSection.sections = sections.ToList();
+            return courseSection;
+        }
 
         /*  public static List<Course> getAllCourses()
           {

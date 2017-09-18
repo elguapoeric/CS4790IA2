@@ -19,6 +19,11 @@ namespace CS4790IA2.Models
             Section section = BasicSchool.getSection(id);
             return section;
         }
+        public static CourseAndSections getCourseAndSections(int? id)
+        {
+            CourseAndSections courseSection = BasicSchool.getCourseAndSections(id);
+            return courseSection;
+        }
 
         public static List<Course> getAllCourses()
         {
